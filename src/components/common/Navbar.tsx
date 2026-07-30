@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Code2, Sparkles, FileText, Send } from 'lucide-react';
+import { Menu, X, Code2, Send, FileText, Zap } from 'lucide-react';
 import { ThemeToggle } from '../ui/ThemeToggle';
 
 interface NavbarProps {
-  onOpenResumeModal: () => void;
   toggleCodeRain: () => void;
   isCodeRainActive: boolean;
   theme: 'dark' | 'light';
   toggleTheme: () => void;
+  onOpenResumeModal?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  onOpenResumeModal,
   toggleCodeRain,
   isCodeRainActive,
   theme,
   toggleTheme,
+  onOpenResumeModal,
 }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
@@ -25,8 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'About', href: '#about', id: 'about' },
-    { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Resume', href: '#resume', id: 'resume' },
+    { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
@@ -34,7 +33,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      // ScrollSpy active section detection
       const sections = navLinks.map((link) => document.getElementById(link.id));
       const scrollPosition = window.scrollY + 200;
 
@@ -53,24 +51,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'glass-nav py-3 shadow-2xl' : 'bg-transparent py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'glass-nav py-3 shadow-2xl' : 'bg-transparent py-5'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
+        {/* Brand Logo: Srinivasan.R */}
         <a href="#home" className="flex items-center gap-2.5 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-400 to-purple-600 p-[1.5px] shadow-[0_0_15px_rgba(37,99,235,0.4)] group-hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] transition-all duration-300">
-            <div className="w-full h-full bg-[#090D16] dark:bg-[#090D16] light:bg-white rounded-[10px] flex items-center justify-center">
+            <div className="w-full h-full dark:bg-[#090D16] light:bg-white rounded-[10px] flex items-center justify-center">
               <Code2 className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="font-extrabold text-base tracking-tight dark:text-white light:text-slate-900 flex items-center gap-1">
-              SRINIVASAN <span className="text-cyan-500 font-black">R.</span>
-            </span>
-            <span className="text-[10px] font-mono tracking-widest text-slate-400 dark:text-slate-400 light:text-slate-600 uppercase">
-              Full Stack Dev
+            <span className="font-extrabold text-lg tracking-tight dark:text-white light:text-slate-900">
+              Srinivasan<span className="text-cyan-500 font-black">.R</span>
             </span>
           </div>
         </a>
@@ -83,11 +77,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.id}
                 href={link.href}
-                className={`relative px-4 py-2 text-xs font-semibold rounded-full transition-colors duration-200 ${
-                  isActive
+                className={`relative px-4 py-2 text-xs font-semibold rounded-full transition-colors duration-200 ${isActive
                     ? 'text-white'
                     : 'dark:text-slate-400 light:text-slate-600 dark:hover:text-slate-200 light:hover:text-slate-900'
-                }`}
+                  }`}
               >
                 {isActive && (
                   <motion.div
@@ -102,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </nav>
 
-        {/* Right CTA Actions & Theme Toggle */}
+        {/* Right Actions & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
           {/* Animated 3D Sun / Moon Theme Toggle */}
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
@@ -111,29 +104,31 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={toggleCodeRain}
             title="Toggle Matrix Code Rain Effect"
-            className={`p-2.5 rounded-xl border transition-all ${
-              isCodeRainActive
+            aria-label="Toggle Code Rain"
+            className={`p-2.5 rounded-xl border transition-all ${isCodeRainActive
                 ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
                 : 'dark:bg-slate-900/60 light:bg-white border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-400 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900'
-            }`}
+              }`}
           >
-            <Sparkles className="w-4 h-4" />
+            <Zap className="w-4 h-4" />
           </button>
 
-          {/* Quick Resume Modal trigger */}
-          <button
-            onClick={onOpenResumeModal}
-            className="px-4 py-2 rounded-xl dark:bg-slate-900/80 light:bg-white dark:hover:bg-slate-800 light:hover:bg-slate-100 text-cyan-500 dark:text-cyan-300 text-xs font-semibold border border-cyan-500/30 flex items-center gap-1.5 shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:border-cyan-400 transition-all"
-          >
-            <FileText className="w-3.5 h-3.5" /> Resume
-          </button>
+          {/* Resume Modal Trigger (Strong Contrast in Light Mode) */}
+          {onOpenResumeModal && (
+            <button
+              onClick={onOpenResumeModal}
+              className="px-4 py-2 rounded-xl dark:bg-slate-900 light:bg-slate-900 dark:hover:bg-slate-800 text-cyan-400 light:text-cyan-300 text-xs font-bold border border-cyan-500/40 flex items-center gap-1.5 shadow-md transition-all"
+            >
+              <FileText className="w-3.5 h-3.5" /> Resume
+            </button>
+          )}
 
-          {/* Contact Button */}
+          {/* Hire Me CTA */}
           <a
             href="#contact"
             className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-semibold shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:brightness-110 flex items-center gap-1.5 transition-all"
           >
-            <Send className="w-3.5 h-3.5" /> Let's Talk
+            <Send className="w-3.5 h-3.5" /> Hire Me
           </a>
         </div>
 
@@ -142,16 +137,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
           <button
-            onClick={toggleCodeRain}
-            className={`p-2 rounded-lg border ${
-              isCodeRainActive ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300' : 'bg-slate-900 border-white/10 text-slate-400'
-            }`}
-          >
-            <Sparkles className="w-4 h-4" />
-          </button>
-
-          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Mobile Menu"
             className="p-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-200 light:text-slate-800 hover:text-cyan-400 transition-colors"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -174,31 +161,32 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.id}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                    activeSection === link.id
+                  className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${activeSection === link.id
                       ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white'
                       : 'dark:text-slate-300 light:text-slate-700 dark:hover:bg-slate-800 light:hover:bg-slate-200'
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </a>
               ))}
               <div className="pt-2 flex flex-col gap-2">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenResumeModal();
-                  }}
-                  className="w-full py-3 rounded-xl bg-slate-800 dark:bg-slate-800 light:bg-slate-200 text-cyan-400 font-semibold text-xs border border-cyan-500/30 flex items-center justify-center gap-2"
-                >
-                  <FileText className="w-4 h-4" /> Preview & Download Resume
-                </button>
+                {onOpenResumeModal && (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      onOpenResumeModal();
+                    }}
+                    className="w-full py-3 rounded-xl bg-slate-900 text-cyan-300 font-bold text-xs border border-cyan-500/40 flex items-center justify-center gap-2"
+                  >
+                    <FileText className="w-4 h-4" /> View Resume
+                  </button>
+                )}
                 <a
                   href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-xs text-center flex items-center justify-center gap-2"
                 >
-                  <Send className="w-4 h-4" /> Contact Me
+                  <Send className="w-4 h-4" /> Hire Me
                 </a>
               </div>
             </div>

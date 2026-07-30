@@ -15,7 +15,7 @@
   }
 
   html.light body {
-    background-color: #f8fafc;
+    background-color: #f4f7fc;
     color: #0f172a;
     overflow-x: hidden;
   }
@@ -28,7 +28,7 @@
     background: #030712;
   }
   .light ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: #e2e8f0;
   }
   ::-webkit-scrollbar-thumb {
     background: #1e293b;
@@ -36,12 +36,47 @@
     border: 2px solid #030712;
   }
   .light ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border: 2px solid #f1f5f9;
+    background: #94a3b8;
+    border: 2px solid #e2e8f0;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #3b82f6;
   }
+}
+
+/* Light Theme Ambient Decorative Circles (Inspired by reference UI) */
+.light-ambient-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.light-ambient-bubbles::before,
+.light-ambient-bubbles::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.12);
+}
+.light-ambient-bubbles::before {
+  width: 140px;
+  height: 140px;
+  top: 8%;
+  left: 5%;
+  box-shadow: 
+    300px 180px 0 20px rgba(148, 163, 184, 0.09),
+    700px 80px 0 10px rgba(56, 189, 248, 0.12),
+    1100px 300px 0 40px rgba(148, 163, 184, 0.08);
+}
+.light-ambient-bubbles::after {
+  width: 90px;
+  height: 90px;
+  top: 40%;
+  right: 8%;
+  box-shadow: 
+    -200px 400px 0 30px rgba(148, 163, 184, 0.1),
+    -800px 250px 0 15px rgba(37, 99, 235, 0.08);
 }
 
 /* Glassmorphism Dark Mode Styles */
@@ -53,13 +88,13 @@
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* Glassmorphism Light Mode Styles */
+/* Glassmorphism Light Mode Styles (Reference Inspired) */
 .light .glass-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
 .dark .glass-card-hover:hover {
@@ -70,9 +105,9 @@
 }
 
 .light .glass-card-hover:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 12px 40px -10px rgba(37, 99, 235, 0.2);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(37, 99, 235, 0.3);
+  box-shadow: 0 14px 40px -10px rgba(37, 99, 235, 0.15);
   transform: translateY(-4px);
 }
 
@@ -84,10 +119,11 @@
 }
 
 .light .glass-nav {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 /* Animated Gradient Borders */
@@ -128,19 +164,13 @@
   -webkit-text-fill-color: transparent;
 }
 .light .text-gradient {
-  background: linear-gradient(135deg, #1D4ED8 0%, #0284C7 50%, #6D28D9 100%);
+  background: linear-gradient(135deg, #2563EB 0%, #0284C7 50%, #7C3AED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-cyan {
   background: linear-gradient(135deg, #38BDF8 0%, #22D3EE 50%, #818CF8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-purple {
-  background: linear-gradient(135deg, #C084FC 0%, #A78BFA 50%, #60A5FA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -155,8 +185,8 @@
 .light .bg-cyber-grid {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
 
 /* Typing cursor animation */

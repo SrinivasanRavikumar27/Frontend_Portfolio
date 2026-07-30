@@ -1,173 +1,161 @@
-import { SkillCategory, EducationItem, CertificationItem, ProjectItem } from '../types';
+import { PERSONAL_CONFIG, PersonalInfo } from './personalConfig';
 
-export const PERSONAL_INFO = {
-  name: "SRINIVASAN RAVIKUMAR",
-  title: "Full Stack Software Developer",
-  email: "tosrinivasanravi@gmail.com",
-  phone: "+91 9003293105",
-  phoneRaw: "9003293105",
-  linkedin: "https://www.linkedin.com/in/srinivasan-ravikumar",
-  github: "https://github.com/SrinivasanRavikumar27",
-  whatsapp: "https://wa.me/919003293105",
-  location: "Tamil Nadu, India",
-  roles: [
-    "Full Stack Software Developer",
-    "Java & Spring Boot Engineer",
-    "MERN Stack Specialist",
-    "REST API & Database Developer",
-  ],
-  heroBullets: [
-    "Full Stack Software Developer passionate about building scalable, high-performance web applications.",
-    "Experienced in Java, Spring Boot, MERN Stack, RESTful APIs, PostgreSQL, and MongoDB.",
-    "I create fast, responsive, and user-focused digital experiences with clean architecture.",
-    "Turning complex requirements into modern, production-ready applications deployed on cloud platforms."
-  ],
-  aboutSummary: "I am a passionate Full Stack Software Developer focused on building scalable, responsive, and user-centric web applications. I enjoy transforming ideas into efficient digital solutions using modern technologies while continuously learning and improving.",
-  stats: [
-    { label: "Engineering Degree", value: "B.Tech IT", description: "Panimalar Eng. College" },
-    { label: "Core Technologies", value: "15+", description: "Full Stack & Testing" },
-    { label: "MERN & Java Stack", value: "100%", description: "Hands-on Expertise" },
-    { label: "Code Quality", value: "Production", description: "Clean & Scalable" }
-  ]
-};
+export const PERSONAL_INFO: PersonalInfo = PERSONAL_CONFIG;
+
+export interface SkillItem {
+  name: string;
+  level: number;
+}
+
+export interface SkillCategory {
+  title: string;
+  skills: SkillItem[];
+}
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: "Frontend Development",
-    category: "Frontend",
-    iconName: "Layout",
-    gradient: "from-blue-600 via-cyan-500 to-teal-400",
-    description: "Building responsive, modern, and interactive user interfaces with optimized state management and seamless user flows.",
+    title: "Languages",
     skills: [
-      { name: "React.js", level: 92, icon: "SiReact", description: "Hooks, Router, State Management, Vite" },
-      { name: "JavaScript (ES6+)", level: 90, icon: "SiJavascript", description: "Async/Await, Promises, Closures, DOM" },
-      { name: "Tailwind CSS", level: 95, icon: "SiTailwindcss", description: "Responsive Layouts, Glassmorphic UI" },
-      { name: "Material UI", level: 88, icon: "SiMui", description: "Component Library & Design Systems" },
-      { name: "Bootstrap", level: 85, icon: "SiBootstrap", description: "Rapid Grid & Responsive Prototyping" },
-      { name: "HTML5 & CSS3", level: 95, icon: "SiHtml5", description: "Semantic Markup & Flex/Grid Styling" }
+      { name: "Java", level: 90 },
+      { name: "JavaScript", level: 92 },
+      { name: "HTML5", level: 95 },
+      { name: "CSS3", level: 95 },
+      { name: "TypeScript", level: 88 }
     ]
   },
   {
-    title: "Backend Engineering",
-    category: "Backend",
-    iconName: "Server",
-    gradient: "from-cyan-500 via-blue-600 to-indigo-600",
-    description: "Architecting robust backend services, secure RESTful APIs, authentication workflows, and server logic.",
+    title: "Frameworks & Environments",
     skills: [
-      { name: "Java", level: 90, icon: "FaJava", description: "OOPs, Collections, Data Structures" },
-      { name: "Spring Boot", level: 86, icon: "SiSpringboot", description: "REST Controllers, Dependency Injection" },
-      { name: "Node.js", level: 88, icon: "SiNodedotjs", description: "Event Loop, Asynchronous Services" },
-      { name: "Express.js", level: 90, icon: "SiExpress", description: "RESTful Routing, Middleware, CORS" },
-      { name: "REST API", level: 94, icon: "TbApi", description: "CRUD Operations, Endpoint Security" },
-      { name: "JWT Authentication", level: 89, icon: "SiJsonwebtokens", description: "Token Verification, Bcrypt Hashing" }
+      { name: "React.js", level: 92 },
+      { name: "Spring Boot", level: 88 },
+      { name: "Express.js", level: 88 },
+      { name: "Node.js", level: 88 },
+      { name: "Bootstrap", level: 90 },
+      { name: "Material UI", level: 90 },
+      { name: "Tailwind CSS", level: 92 }
     ]
   },
   {
-    title: "Databases & Storage",
-    category: "Database",
-    iconName: "Database",
-    gradient: "from-purple-600 via-indigo-500 to-blue-500",
-    description: "Designing efficient relational & NoSQL database schemas, queries, and data management pipelines.",
+    title: "Databases",
     skills: [
-      { name: "PostgreSQL", level: 88, icon: "SiPostgresql", description: "Relational Queries, Schema Integrity" },
-      { name: "MongoDB", level: 90, icon: "SiMongodb", description: "NoSQL Collections, Aggregation Pipeline" },
-      { name: "MongoDB Atlas", level: 88, icon: "SiMongodb", description: "Cloud Database Hosting & Cluster Config" },
-      { name: "MySQL", level: 85, icon: "SiMysql", description: "Structured Data, Relational Joins & Views" }
+      { name: "PostgreSQL", level: 88 },
+      { name: "MySQL", level: 88 },
+      { name: "MongoDB", level: 90 },
+      { name: "MongoDB Atlas", level: 88 }
     ]
   },
   {
-    title: "Manual & API Testing",
-    category: "Manual Testing",
-    iconName: "CheckCircle2",
-    gradient: "from-emerald-500 via-teal-500 to-cyan-500",
-    description: "Ensuring 100% application reliability through systematic test execution, bug lifecycle tracking, and API validation.",
+    title: "APIs & Deployment",
     skills: [
-      { name: "API Validation", level: 92, icon: "TbApi", description: "Postman API Execution, Status Verification" },
-      { name: "Test Cases Creation", level: 95, icon: "ClipboardList", description: "Comprehensive Scenario & Edge Coverage" },
-      { name: "Bug Reporting", level: 92, icon: "Bug", description: "Issue Documentation & Severity Tracking" },
-      { name: "Functional Testing", level: 94, icon: "CheckSquare", description: "Business Logic & Workflow Verification" },
-      { name: "UI & Cross-Browser", level: 90, icon: "Monitor", description: "Responsive & Accessibility Auditing" },
-      { name: "Regression Testing", level: 88, icon: "RefreshCw", description: "Version Upgrade Integrity Checks" }
+      { name: "RESTful APIs (CRUD)", level: 94 },
+      { name: "Netlify", level: 90 },
+      { name: "Render", level: 88 },
+      { name: "Vite", level: 92 }
     ]
   },
   {
-    title: "Tools, Version Control & Cloud",
-    category: "Tools & Deployment",
-    iconName: "Wrench",
-    gradient: "from-blue-500 via-purple-600 to-pink-500",
-    description: "Leveraging modern developer tools, version control, build tools, and automated deployment platforms.",
+    title: "Tools & Version Control",
     skills: [
-      { name: "Git & GitHub", level: 92, icon: "SiGithub", description: "Branching, PRs, Version Control Workflow" },
-      { name: "Netlify", level: 88, icon: "SiNetlify", description: "Frontend Deployment & Continuous Delivery" },
-      { name: "Render", level: 86, icon: "SiRender", description: "Node/Express Backend Cloud Hosting" },
-      { name: "Maven & NPM", level: 88, icon: "SiApachemaven", description: "Package & Dependency Management" },
-      { name: "VS Code & Eclipse", level: 94, icon: "SiVisualstudiocode", description: "IDE Tools, Debugging, Extensions" },
-      { name: "PG Admin & Compass", level: 90, icon: "Database", description: "Database Management GUI Applications" }
+      { name: "Git", level: 90 },
+      { name: "GitHub", level: 92 },
+      { name: "Maven", level: 85 },
+      { name: "NPM", level: 90 },
+      { name: "VS Code", level: 95 },
+      { name: "Eclipse", level: 85 },
+      { name: "PG Admin", level: 85 },
+      { name: "MongoDB Compass", level: 88 }
     ]
   }
 ];
 
+export interface EducationItem {
+  degree: string;
+  institution: string;
+  location: string;
+  period: string;
+  details?: string;
+}
+
 export const EDUCATION_LIST: EducationItem[] = [
   {
-    degree: "B. TECH - IT (Information Technology)",
-    institution: "Panimalar Engineering College (Anna University - Chennai)",
+    degree: "B. Tech - IT (Information Technology)",
+    institution: "Panimalar Engineering College (Anna University)",
     location: "Tiruvallur, Tamil Nadu, India",
     period: "2016 – 2020",
-    details: "Focus on Computer Science fundamentals, Software Engineering, Object Oriented Programming in Java, Web Technologies, Database Management Systems, and Networks."
+    details: "Graduated with strong foundation in Software Engineering, Data Structures, OOP, Web Technologies, and Database Management Systems."
   },
   {
-    degree: "HSLC (Higher Secondary Learning Certificate)",
+    degree: "HSLC (Higher Secondary)",
     institution: "Velammal Matriculation Higher Secondary School",
     location: "Ponneri, Tamil Nadu, India",
     period: "2015 – 2016",
-    details: "Mathematics, Physics, Chemistry, and Computer Science specialization."
+    details: "Completed Mathematics, Physics, Chemistry, and Computer Science."
   },
   {
-    degree: "SSLC (Secondary School Leaving Certificate)",
+    degree: "SSLC (Secondary School)",
     institution: "Velammal Matriculation Higher Secondary School",
     location: "Ponneri, Tamil Nadu, India",
     period: "2013 – 2014",
-    details: "General Science, Mathematics, and Foundation Academics."
+    details: "Completed secondary education with distinction."
   }
 ];
+
+export interface CertificationItem {
+  title: string;
+  issuer: string;
+  focus: string;
+}
 
 export const CERTIFICATIONS_LIST: CertificationItem[] = [
   {
     title: "Full Stack Web Development in MERN",
     issuer: "GUVI GEEK NETWORKS (IITM RESEARCH PARK)",
-    focus: "MERN Stack (MongoDB, Express.js, React.js, Node.js), REST APIs, Redux State Management, Authentication, and Modern Web Projects."
+    focus: "Comprehensive hands-on training in React, Node.js, Express.js, MongoDB, REST API development, and frontend integration."
   },
   {
     title: "Full Stack Web Development in JAVA",
     issuer: "NIRMAAN ORGANIZATION",
-    focus: "Java Fundamentals, Object-Oriented Programming (OOP), Spring Boot Framework, REST API Development, Relational Databases, and MVC Architecture."
+    focus: "Enterprise Java application development, Spring Boot microservices, Object-Oriented Design, and relational SQL databases."
   }
 ];
 
+export interface ProjectItem {
+  id: string;
+  title: string;
+  category: string;
+  tagline: string;
+  scope: string;
+  highlights: string[];
+  techStack: {
+    frontend: string[];
+    backend: string[];
+  };
+  links: {
+    github: string;
+    live: string;
+  };
+}
+
 export const FEATURED_PROJECTS: ProjectItem[] = [
   {
-    id: "petty-cash-management",
+    id: "petty-cash-mern",
     title: "Petty Cash Management System",
-    tagline: "Full Stack (MERN) Enterprise Financial Tracking Solution",
-    subtitle: "Streamlining organizational petty cash workflows with real-time analytics, JWT security, and interactive charts.",
-    category: "Full Stack MERN",
-    techStack: {
-      frontend: ["Vite", "React.js", "Material UI", "Redux", "Axios", "React Router DOM", "Chart.js", "React Hot Toast"],
-      backend: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT Auth", "Bcrypt", "Nodemailer", "Multer", "CORS"],
-      features: ["Token-based Auth", "Role-Based Access", "Expense Categorization", "PDF/Excel Reports", "Visual Analytics", "Email Notifications"]
-    },
+    category: "Full Stack (MERN)",
+    tagline: "Streamlining organizational petty cash workflows and expense tracking",
+    scope: "A full-stack enterprise web application for managing cash transactions within an organization. Includes real-time tracking, visual expense breakdown, JWT authentication, automated email receipts, and attachment upload capabilities.",
     highlights: [
-      "Built responsive SPA using Vite + React with Material UI components for sleek enterprise interface.",
-      "Implemented secure JWT authentication with bcrypt password hashing and state management via Redux.",
-      "Engineered Node.js & Express.js REST API with Mongoose ORM for efficient transaction processing.",
-      "Integrated Chart.js for real-time visual expenditure breakdown and Nodemailer for transaction email receipts.",
-      "Added Multer file upload capabilities for receipt verification and attachment management."
+      "Vite + React.js frontend with Material UI and React Router DOM navigation.",
+      "Redux for state management, Axios for HTTP requests, and Chart.js for real-time data visualization.",
+      "Node.js & Express.js REST API with JWT authentication, dotenv environment variables, and bcrypt hashing.",
+      "MongoDB & Mongoose database storage with Multer file uploads for receipts and Nodemailer for email alerts."
     ],
-    scope: "The project provides a comprehensive solution for managing organizational petty cash, facilitating transparent tracking, reporting, and automated cash transaction auditing.",
+    techStack: {
+      frontend: ["Vite", "React.js", "Material UI", "Redux", "Chart.js", "Axios"],
+      backend: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "Nodemailer", "Multer"]
+    },
     links: {
       github: "https://github.com/SrinivasanRavikumar27",
       live: "https://github.com/SrinivasanRavikumar27"
-    },
-    metrics: ["100% Secure Auth", "<200ms API Latency", "Responsive Layout", "Real-time Charts"]
+    }
   }
 ];

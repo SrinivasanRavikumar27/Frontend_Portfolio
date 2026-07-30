@@ -17,3 +17,7 @@ lerna-debug.log*
 .DS_Store
 .vscode/
 .idea/
+
+# environment files
+.env
+.env.local

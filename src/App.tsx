@@ -4,15 +4,16 @@ import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
-import { Skills } from './sections/Skills';
-import { Resume } from './sections/Resume';
+import { Projects } from './sections/Projects';
 import { Contact } from './sections/Contact';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { CodeRain } from './components/ui/CodeRain';
 import { ScrollProgressBar } from './components/ui/ScrollProgressBar';
 import { ToastContainer, ToastProps } from './components/ui/Toast';
 import { ResumeModal } from './components/ui/ResumeModal';
+import { Preloader } from './components/ui/Preloader';
 import { FileText, Send } from 'lucide-react';
+import { PERSONAL_INFO } from './constants/portfolioData';
 
 export const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -71,8 +72,11 @@ export const App: React.FC = () => {
 
   return (
     <div className={`relative min-h-screen transition-colors duration-500 ${
-      theme === 'dark' ? 'bg-[#030712] text-slate-100' : 'bg-slate-50 text-slate-900'
+      theme === 'dark' ? 'bg-[#030712] text-slate-100' : 'bg-[#f4f7fc] text-slate-900'
     } selection:bg-blue-600/30 selection:text-cyan-500`}>
+      {/* Initial Portfolio Preloader */}
+      <Preloader />
+
       {/* Scroll Progress Bar */}
       <ScrollProgressBar />
 
@@ -84,26 +88,25 @@ export const App: React.FC = () => {
 
       {/* Navbar Header with 3D Sun/Moon Toggle */}
       <Navbar
-        onOpenResumeModal={() => setIsResumeModalOpen(true)}
         toggleCodeRain={() => setIsCodeRainActive(!isCodeRainActive)}
         isCodeRainActive={isCodeRainActive}
         theme={theme}
         toggleTheme={toggleTheme}
+        onOpenResumeModal={() => setIsResumeModalOpen(true)}
       />
 
       {/* Main Content Sections */}
       <main className="relative z-10">
-        <Hero onOpenResumeModal={() => setIsResumeModalOpen(true)} theme={theme} />
+        <Hero theme={theme} />
         <About onOpenResumeModal={() => setIsResumeModalOpen(true)} />
-        <Skills />
-        <Resume onOpenResumeModal={() => setIsResumeModalOpen(true)} />
+        <Projects />
         <Contact addToast={addToast} />
       </main>
 
       {/* Footer */}
       <Footer />
 
-      {/* Interactive Resume Modal */}
+      {/* Interactive Resume Modal Viewer */}
       <ResumeModal
         isOpen={isResumeModalOpen}
         onClose={() => setIsResumeModalOpen(false)}
@@ -112,24 +115,33 @@ export const App: React.FC = () => {
       {/* Global Toast Container */}
       <ToastContainer toasts={toasts} removeToast={removeToast} />
 
-      {/* Floating Action Quick Access Buttons */}
-      <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3 pointer-events-auto">
-        <button
-          onClick={() => setIsResumeModalOpen(true)}
-          className="p-3 rounded-full dark:bg-slate-900/90 light:bg-white border border-cyan-500/40 text-cyan-500 dark:text-cyan-300 hover:text-cyan-600 dark:hover:text-white shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all flex items-center gap-2 group text-xs font-semibold"
-          title="Preview Resume"
-        >
-          <FileText className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          <span className="hidden sm:inline pr-1">Resume</span>
-        </button>
-
+      {/* Floating Action FAB Buttons — EXPAND ONLY THE HOVERED BUTTON; THE OTHER STAYS COLLAPSED AS ICON */}
+      <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3 pointer-events-auto items-start">
+        {/* Button 1: Hire Me (Expands ONLY when hovering over this specific button) */}
         <a
           href="#contact"
-          className="p-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all flex items-center gap-2 group text-xs font-semibold"
-          title="Contact Me"
+          className="group flex items-center p-3.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:brightness-110 transition-all duration-300 overflow-hidden cursor-pointer"
+          title="Hire Me"
+          aria-label="Hire Me Link"
         >
-          <Send className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          <span className="hidden sm:inline pr-1">Hire Me</span>
+          <Send className="w-5 h-5 shrink-0" />
+          <span className="max-w-0 opacity-0 group-hover:max-w-xs group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 font-bold text-xs whitespace-nowrap">
+            Hire Me
+          </span>
+        </a>
+
+        {/* Button 2: Download Resume (High Contrast in Light Mode, Expands ONLY when hovering over this specific button) */}
+        <a
+          href={PERSONAL_INFO.resumeUrl}
+          download="resume.pdf"
+          className="group flex items-center p-3.5 rounded-full dark:bg-slate-900 light:bg-slate-900 border border-cyan-400 text-cyan-300 light:text-cyan-300 hover:text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 overflow-hidden cursor-pointer"
+          title="Download Resume"
+          aria-label="Download Resume Link"
+        >
+          <FileText className="w-5 h-5 shrink-0 text-cyan-300" />
+          <span className="max-w-0 opacity-0 group-hover:max-w-xs group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 font-bold text-xs whitespace-nowrap text-cyan-300">
+            Download Resume
+          </span>
         </a>
       </div>
     </div>
