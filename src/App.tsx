@@ -133,7 +133,7 @@ export const App: React.FC = () => {
         {/* Button 2: Download Resume (High Contrast in Light Mode, Expands ONLY when hovering over this specific button) */}
         <a
           href={PERSONAL_INFO.resumeUrl}
-          download="resume.pdf"
+          download={PERSONAL_INFO.resumeFileName || "Srinivasan-Ravikumar-Resume.pdf"}
           className="group flex items-center p-3.5 rounded-full dark:bg-slate-900 light:bg-slate-900 border border-cyan-400 text-cyan-300 light:text-cyan-300 hover:text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 overflow-hidden cursor-pointer"
           title="Download Resume"
           aria-label="Download Resume Link"

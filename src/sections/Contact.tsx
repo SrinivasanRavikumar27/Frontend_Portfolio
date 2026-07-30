@@ -24,49 +24,78 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    try {
-      const serviceId = 'service_portfolio';
-      const templateId = 'template_portfolio';
-      const publicKey = 'public_key_portfolio';
 
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: data.user_name,
-          from_email: data.user_email,
-          subject: data.subject,
-          message: data.message,
-          to_email: PERSONAL_INFO.email,
-        },
-        publicKey
-      ).catch(() => {
-        console.log('Form submission simulated:', data);
-      });
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#2563EB', '#06B6D4', '#7C3AED'],
-      });
+    const hasValidEmailJS =
+      serviceId &&
+      templateId &&
+      publicKey &&
+      serviceId !== 'service_portfolio' &&
+      publicKey !== 'public_key_portfolio';
 
-      addToast({
-        type: 'success',
-        title: 'Message Sent Successfully!',
-        message: `Thank you ${data.user_name}! Your message has been sent to ${PERSONAL_INFO.email}.`,
-      });
+    if (hasValidEmailJS) {
+      try {
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            from_name: data.user_name,
+            from_email: data.user_email,
+            subject: data.subject || 'Portfolio Inquiry',
+            message: data.message,
+            to_email: PERSONAL_INFO.email,
+          },
+          publicKey
+        );
 
-      reset();
-    } catch (error) {
-      addToast({
-        type: 'error',
-        title: 'Submission Error',
-        message: 'Could not send message automatically. Please email direct to tosrinivasanravi@gmail.com.',
-      });
-    } finally {
-      setIsSubmitting(false);
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#2563EB', '#06B6D4', '#7C3AED'],
+        });
+
+        addToast({
+          type: 'success',
+          title: 'Message Sent Successfully!',
+          message: `Thank you ${data.user_name}! Your message has been sent to ${PERSONAL_INFO.email}.`,
+        });
+
+        reset();
+        setIsSubmitting(false);
+        return;
+      } catch (err) {
+        console.warn('EmailJS delivery failed, using direct email client fallback:', err);
+      }
     }
+
+    // Direct mailto fallback if EmailJS is not configured or fails
+    const subjectStr = encodeURIComponent(data.subject || `Portfolio Inquiry from ${data.user_name}`);
+    const bodyStr = encodeURIComponent(
+      `Name: ${data.user_name}\nEmail: ${data.user_email}\n\nMessage:\n${data.message}`
+    );
+    const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${subjectStr}&body=${bodyStr}`;
+
+    window.open(mailtoUrl, '_blank');
+
+    confetti({
+      particleCount: 60,
+      spread: 60,
+      origin: { y: 0.6 },
+      colors: ['#2563EB', '#06B6D4', '#7C3AED'],
+    });
+
+    addToast({
+      type: 'info',
+      title: 'Opening Email Client',
+      message: `Opening your email app to send your message directly to ${PERSONAL_INFO.email}.`,
+    });
+
+    reset();
+    setIsSubmitting(false);
   };
 
   return (

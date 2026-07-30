@@ -81,7 +81,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
             </button>
             <a
               href={PERSONAL_INFO.resumeUrl}
-              download="resume.pdf"
+              download={PERSONAL_INFO.resumeFileName || "Srinivasan-Ravikumar-Resume.pdf"}
               className="px-4 py-2 rounded-xl dark:bg-slate-900 light:bg-slate-900 border border-cyan-500/40 text-cyan-400 light:text-cyan-300 hover:border-cyan-400 text-xs font-bold flex items-center gap-2 transition-all shadow-md"
             >
               <Download className="w-4 h-4" /> Download Resume

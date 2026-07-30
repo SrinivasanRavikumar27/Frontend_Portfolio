@@ -60,7 +60,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               {/* Direct Download PDF Button */}
               <a
                 href={PERSONAL_INFO.resumeUrl}
-                download="resume.pdf"
+                download={PERSONAL_INFO.resumeFileName || "Srinivasan-Ravikumar-Resume.pdf"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-xs shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all flex items-center gap-2"
