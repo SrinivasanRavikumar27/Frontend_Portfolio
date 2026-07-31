@@ -128,13 +128,13 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
           >
             <GlassCard glowColor="cyan" className="p-6 md:p-8 border-cyan-500/30">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Photo & Toggle */}
+                {/* Profile Photo Section — Restored exact styling & object-position from commit 3ff7ae7 */}
                 <div className="lg:col-span-4 text-center space-y-4">
                   <div className="relative w-48 h-48 mx-auto rounded-3xl overflow-hidden border-2 border-cyan-400/40 p-1 shadow-[0_0_25px_rgba(6,182,212,0.3)]">
                     <img
                       src={photoMode === 'profile' ? PERSONAL_INFO.profilePhoto : PERSONAL_INFO.animePhoto}
                       alt={PERSONAL_INFO.name}
-                      className="w-full h-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
+                      className="w-full h-full object-cover object-[50%_25%] rounded-2xl transition-transform duration-500 hover:scale-105"
                     />
                   </div>
 
