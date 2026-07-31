@@ -23,7 +23,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   if (!isOpen) return null;
 
-  const pdfPath = PERSONAL_INFO.resumeUrl || '/assets/resume/resume.pdf';
+  const pdfPath = PERSONAL_INFO.resumeUrl || '/assets/resume/Srinivasan-Ravikumar-Resume.pdf';
 
   return (
     <AnimatePresence>
@@ -62,7 +62,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               {/* Direct Download PDF Button */}
               <a
                 href={pdfPath}
-                download="resume.pdf"
+                download="Srinivasan-Ravikumar-Resume.pdf"
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-xs shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all flex items-center gap-2"
               >
                 <Download className="w-4 h-4" /> Download PDF
