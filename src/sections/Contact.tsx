@@ -152,10 +152,10 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                   </a>
                 </div>
 
-                {/* Right Sub-Column (Email, Phone, Location - Vertical Stack) */}
+                {/* Right Sub-Column (Email: ONLY tosrinivasanravi@gmail.com, Phone, Location - Vertical Stack) */}
                 <div className="col-span-9 sm:col-span-10 flex flex-col justify-around gap-4">
                   <a
-                    href={`mailto:${PERSONAL_INFO.email}`}
+                    href="mailto:tosrinivasanravi@gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-4 p-3.5 rounded-xl dark:bg-slate-900/60 light:bg-slate-100 border border-white/5 dark:border-white/5 light:border-slate-200 hover:border-cyan-500/40 transition-all group"
@@ -166,7 +166,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                     <div className="min-w-0">
                       <span className="text-[10px] font-mono text-slate-400 block uppercase">Email</span>
                       <span className="text-xs sm:text-sm font-semibold dark:text-slate-100 light:text-slate-900 group-hover:text-cyan-500 transition-colors truncate block">
-                        {PERSONAL_INFO.email}
+                        tosrinivasanravi@gmail.com
                       </span>
                     </div>
                   </a>
@@ -202,7 +202,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
             </GlassCard>
           </div>
 
-          {/* Right Panel (50%): Contact Form ONLY with Enhanced Light Mode Inputs */}
+          {/* Right Panel (50%): Contact Form ONLY with Enhanced Light Mode Inputs, Caret, and Autofill */}
           <div className="lg:col-span-6">
             <GlassCard glowColor="purple" className="p-6 md:p-8 h-full border-purple-500/30 flex flex-col justify-between">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 my-auto" noValidate>
@@ -214,7 +214,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                       type="text"
                       placeholder="John Doe"
                       {...register('name', { required: 'Name is required' })}
-                      className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 text-xs shadow-sm font-medium"
+                      className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 dark:caret-cyan-400 light:caret-slate-900 text-xs shadow-sm font-semibold transition-all"
                     />
                     {errors.name && (
                       <p className="text-[10px] text-rose-400 font-medium">{errors.name.message}</p>
@@ -231,7 +231,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                         required: 'Email is required',
                         pattern: { value: /^\S+@\S+$/i, message: 'Please enter a valid email address' },
                       })}
-                      className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 text-xs shadow-sm font-medium"
+                      className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 dark:caret-cyan-400 light:caret-slate-900 text-xs shadow-sm font-semibold transition-all"
                     />
                     {errors.email && (
                       <p className="text-[10px] text-rose-400 font-medium">{errors.email.message}</p>
@@ -246,7 +246,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                     type="text"
                     placeholder="Software Developer Opportunity"
                     {...register('subject', { required: 'Subject is required' })}
-                    className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 text-xs shadow-sm font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 dark:caret-cyan-400 light:caret-slate-900 text-xs shadow-sm font-semibold transition-all"
                   />
                   {errors.subject && (
                     <p className="text-[10px] text-rose-400 font-medium">{errors.subject.message}</p>
@@ -260,7 +260,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                     rows={4}
                     placeholder="Hi Srinivasan, I'd like to discuss a role..."
                     {...register('message', { required: 'Message is required' })}
-                    className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 text-xs resize-none shadow-sm font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-400 light:placeholder-slate-500 focus:outline-none focus:border-cyan-400 light:focus:border-cyan-600 dark:caret-cyan-400 light:caret-slate-900 text-xs resize-none shadow-sm font-semibold transition-all"
                   />
                   {errors.message && (
                     <p className="text-[10px] text-rose-400 font-medium">{errors.message.message}</p>

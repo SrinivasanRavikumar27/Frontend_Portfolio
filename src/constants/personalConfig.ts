@@ -33,8 +33,8 @@ export const PERSONAL_CONFIG: PersonalInfo = {
   instagram: "https://instagram.com/srinivasan_ravikumar",
   profilePhoto: "/assets/images/profile.png",
   animePhoto: "/assets/images/anime.png",
-  resumeUrl: "/assets/resume/resume.pdf",
-  resumeDownloadUrl: "/assets/resume/resume.pdf",
+  resumeUrl: "/assets/resume/Srinivasan-Ravikumar-Resume.pdf",
+  resumeDownloadUrl: "/assets/resume/Srinivasan-Ravikumar-Resume.pdf",
   resumeFileName: "Srinivasan-Ravikumar-Resume.pdf",
   heroBullets: [
     "Full-Stack Developer with hands-on experience building responsive web applications using Java, Spring Boot, React, and Node.js.",

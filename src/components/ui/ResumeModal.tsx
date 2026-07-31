@@ -23,7 +23,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   if (!isOpen) return null;
 
-  const pdfPath = PERSONAL_INFO.resumeUrl || '/assets/resume/resume.pdf';
+  const pdfPath = PERSONAL_INFO.resumeUrl || '/assets/resume/Srinivasan-Ravikumar-Resume.pdf';
 
   return (
     <AnimatePresence>
