@@ -134,7 +134,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
                     <img
                       src={photoMode === 'profile' ? PERSONAL_INFO.profilePhoto : PERSONAL_INFO.animePhoto}
                       alt={PERSONAL_INFO.name}
-                      className={`w-full h-full object-cover ${photoMode === 'profile' ? 'object-[50%_25%]' : 'object-center'} rounded-2xl transition-transform duration-500 hover:scale-105`}
+                      className="w-full h-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
                     />
                   </div>
 
