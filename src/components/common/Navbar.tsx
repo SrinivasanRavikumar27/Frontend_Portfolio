@@ -59,19 +59,19 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Brand Logo: Srinivasan.R */}
         <a href="#home" className="flex items-center gap-2.5 group">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-400 to-purple-600 p-[1.5px] shadow-[0_0_15px_rgba(37,99,235,0.4)] group-hover:shadow-[0_0_25px_rgba(6,182,212,0.8)] transition-all duration-300">
-            <div className="w-full h-full dark:bg-[#090D16] light:bg-white rounded-[10px] flex items-center justify-center">
-              <Code2 className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
+            <div className="w-full h-full bg-white dark:bg-[#090D16] rounded-[10px] flex items-center justify-center">
+              <Code2 className="w-5 h-5 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="font-extrabold text-lg tracking-tight dark:text-white light:text-slate-900">
+            <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white">
               Srinivasan<span className="text-cyan-500 font-black">.R</span>
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-900/60 dark:bg-slate-900/60 light:bg-white/80 p-1.5 rounded-full border border-white/10 dark:border-white/10 light:border-slate-300 light:shadow-md backdrop-blur-md">
+        <nav className="hidden md:flex items-center gap-1 bg-white/80 dark:bg-slate-900/60 p-1.5 rounded-full border border-slate-300 dark:border-white/10 shadow-md backdrop-blur-md">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className={`relative px-4 py-2 text-xs font-semibold rounded-full transition-colors duration-200 ${
                   isActive
                     ? 'text-white'
-                    : 'dark:text-slate-400 light:text-slate-700 dark:hover:text-slate-200 light:hover:text-slate-900'
+                    : 'text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
                 }`}
               >
                 {isActive && (
@@ -107,10 +107,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={toggleCodeRain}
             title="Toggle Matrix Code Rain Effect"
             aria-label="Toggle Code Rain"
-            className={`p-2 rounded-xl border transition-all ${
+            className={`p-2.5 rounded-xl border transition-all ${
               isCodeRainActive
-                ? 'bg-cyan-500/20 border-cyan-400 text-cyan-500 dark:text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
-                : 'dark:bg-slate-900/60 light:bg-white border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-400 light:text-slate-800 light:shadow-md hover:light:bg-slate-100 dark:hover:text-white'
+                ? 'bg-cyan-500/20 border-cyan-400 text-cyan-600 dark:text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                : 'bg-white dark:bg-slate-900/60 border-slate-300 dark:border-white/10 text-slate-800 dark:text-slate-400 shadow-md hover:bg-slate-100 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <Zap className="w-4 h-4" />
@@ -120,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {onOpenResumeModal && (
             <button
               onClick={onOpenResumeModal}
-              className="px-4 py-2 rounded-xl dark:bg-slate-900 light:bg-slate-900 dark:hover:bg-slate-800 text-cyan-400 light:text-cyan-300 text-xs font-bold border border-cyan-500/40 flex items-center gap-1.5 shadow-md transition-all"
+              className="px-4 py-2 rounded-xl bg-slate-900 text-cyan-300 font-bold text-xs border border-cyan-500/40 flex items-center gap-1.5 shadow-md hover:bg-slate-800 transition-all"
             >
               <FileText className="w-3.5 h-3.5" /> Resume
             </button>
@@ -142,7 +142,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Mobile Menu"
-            className="p-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-200 light:text-slate-800 hover:text-cyan-400 transition-colors shadow-sm"
+            className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-300 dark:border-white/10 text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors shadow-sm"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -156,7 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-nav border-b border-white/10 overflow-hidden"
+            className="md:hidden glass-nav border-b border-slate-200 dark:border-white/10 overflow-hidden"
           >
             <div className="px-4 pt-3 pb-6 space-y-3">
               {navLinks.map((link) => (
@@ -167,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                     activeSection === link.id
                       ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white'
-                      : 'dark:text-slate-300 light:text-slate-700 dark:hover:bg-slate-800 light:hover:bg-slate-200'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800'
                   }`}
                 >
                   {link.name}

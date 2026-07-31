@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Lenis from 'lenis';
 import { Navbar } from './components/common/Navbar';
-import { Footer } from './components/common/Footer';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
 import { Projects } from './sections/Projects';
 import { Contact } from './sections/Contact';
+import { Footer } from './components/common/Footer';
+import { ResumeModal } from './components/ui/ResumeModal';
+import { ToastContainer, ToastProps } from './components/ui/Toast';
 import { CustomCursor } from './components/ui/CustomCursor';
 import { CodeRain } from './components/ui/CodeRain';
-import { ScrollProgressBar } from './components/ui/ScrollProgressBar';
-import { ToastContainer, ToastProps } from './components/ui/Toast';
-import { ResumeModal } from './components/ui/ResumeModal';
-import { Preloader } from './components/ui/Preloader';
 import { FileText, Send } from 'lucide-react';
-import { PERSONAL_INFO } from './constants/portfolioData';
 
 export const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -57,9 +54,9 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  const addToast = (toast: { type: 'success' | 'error' | 'info'; title: string; message: string }) => {
+  const addToast = (type: 'success' | 'error' | 'info', title: string, message: string) => {
     const id = Math.random().toString(36).substring(2, 9);
-    setToasts((prev) => [...prev, { id, ...toast }]);
+    setToasts((prev) => [...prev, { id, type, title, message }]);
 
     setTimeout(() => {
       removeToast(id);
@@ -73,20 +70,14 @@ export const App: React.FC = () => {
   return (
     <div className={`relative min-h-screen transition-colors duration-500 ${
       theme === 'dark' ? 'bg-[#030712] text-slate-100' : 'bg-[#f4f7fc] text-slate-900'
-    } selection:bg-blue-600/30 selection:text-cyan-500`}>
-      {/* Initial Portfolio Preloader */}
-      <Preloader />
-
-      {/* Scroll Progress Bar */}
-      <ScrollProgressBar />
-
-      {/* Custom Glowing Cursor */}
+    }`}>
+      {/* Interactive Custom Cursor Follower */}
       <CustomCursor />
 
-      {/* Optional Cyber Code Rain Background Effect */}
-      <CodeRain opacity={isCodeRainActive ? (theme === 'dark' ? 0.22 : 0.15) : 0} />
+      {/* Cyber Code Rain Matrix Background */}
+      <CodeRain isActive={isCodeRainActive} />
 
-      {/* Navbar Header with 3D Sun/Moon Toggle */}
+      {/* Navbar Header */}
       <Navbar
         toggleCodeRain={() => setIsCodeRainActive(!isCodeRainActive)}
         isCodeRainActive={isCodeRainActive}
@@ -115,38 +106,38 @@ export const App: React.FC = () => {
       {/* Global Toast Container */}
       <ToastContainer toasts={toasts} removeToast={removeToast} />
 
-      {/* Floating Action FAB Buttons — EXPAND ONLY THE HOVERED BUTTON */}
-      <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3 pointer-events-auto items-start">
-        {/* Button 1: Hire Me */}
-        <a
-          href="#contact"
-          className="group flex items-center p-3.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:brightness-110 transition-all duration-300 overflow-hidden cursor-pointer"
-          title="Hire Me"
-          aria-label="Hire Me Link"
-        >
-          <Send className="w-5 h-5 shrink-0" />
-          <span className="max-w-0 opacity-0 group-hover:max-w-xs group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 font-bold text-xs whitespace-nowrap">
-            Hire Me
-          </span>
-        </a>
+      {/* Floating Action Buttons */}
+      <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+        {/* Floating Action: View Resume */}
+        <div className="relative group">
+          <button
+            onClick={() => setIsResumeModalOpen(true)}
+            aria-label="View Resume"
+            className="p-3.5 rounded-full bg-slate-900 text-cyan-300 border border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:scale-110 hover:bg-slate-800 transition-all flex items-center gap-2"
+          >
+            <FileText className="w-5 h-5" />
+            <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-bold">
+              View Resume
+            </span>
+          </button>
+        </div>
 
-        {/* Button 2: Download Resume */}
-        <a
-          href={PERSONAL_INFO.resumeUrl}
-          download="Srinivasan-Ravikumar-Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center p-3.5 rounded-full dark:bg-slate-900 light:bg-slate-900 border border-cyan-400 text-cyan-300 light:text-cyan-300 hover:text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 overflow-hidden cursor-pointer"
-          title="Download Resume"
-          aria-label="Download Resume Link"
-        >
-          <FileText className="w-5 h-5 shrink-0 text-cyan-300" />
-          <span className="max-w-0 opacity-0 group-hover:max-w-xs group-hover:opacity-100 group-hover:ml-2 transition-all duration-300 font-bold text-xs whitespace-nowrap text-cyan-300">
-            Download Resume
-          </span>
-        </a>
+        {/* Floating Action: Direct Hire / Contact */}
+        <div className="relative group">
+          <a
+            href="#contact"
+            aria-label="Contact Me"
+            className="p-3.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-110 transition-all flex items-center gap-2"
+          >
+            <Send className="w-5 h-5" />
+            <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap text-xs font-semibold">
+              Contact Me
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   );
 };
+
 export default App;

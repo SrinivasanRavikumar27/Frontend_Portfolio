@@ -2,12 +2,14 @@ import React, { useEffect, useRef } from 'react';
 
 interface CodeRainProps {
   opacity?: number;
+  isActive?: boolean;
 }
 
-export const CodeRain: React.FC<CodeRainProps> = ({ opacity = 0.12 }) => {
+export const CodeRain: React.FC<CodeRainProps> = ({ opacity = 0.12, isActive = false }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    if (!isActive) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -31,7 +33,6 @@ export const CodeRain: React.FC<CodeRainProps> = ({ opacity = 0.12 }) => {
     const drops: number[] = new Array(columns).fill(1);
 
     const draw = () => {
-      // Semi-transparent background clear for trail effect
       ctx.fillStyle = 'rgba(3, 7, 18, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -60,13 +61,15 @@ export const CodeRain: React.FC<CodeRainProps> = ({ opacity = 0.12 }) => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [isActive]);
+
+  if (!isActive) return null;
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-1000"
-      style={{ opacity }}
+      style={{ opacity: isActive ? 0.35 : opacity }}
     />
   );
 };

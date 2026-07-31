@@ -38,7 +38,7 @@ const EXACT_SKILLS = [
     category: "Tools & Ecosystem",
     items: [
       { name: "Git", icon: FaGitAlt, color: "text-orange-500", bg: "bg-orange-500/10" },
-      { name: "GitHub", icon: FaGithub, color: "text-slate-200", bg: "bg-slate-200/10" },
+      { name: "GitHub", icon: FaGithub, color: "text-slate-700 dark:text-slate-200", bg: "bg-slate-200/50 dark:bg-slate-200/10" },
       { name: "Postman", icon: SiPostman, color: "text-orange-400", bg: "bg-orange-400/10" },
       { name: "VS Code", icon: VscVscode, color: "text-blue-400", bg: "bg-blue-400/10" },
       { name: "Eclipse", icon: SiEclipseide, color: "text-indigo-400", bg: "bg-indigo-400/10" },
@@ -60,12 +60,12 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-white/10 dark:border-white/10 light:border-slate-200">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-white/10">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-500 dark:text-cyan-400 border border-cyan-500/30 text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30 text-xs font-mono">
               <User className="w-3.5 h-3.5" /> PROFILE & EXPERTISE
             </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold dark:text-white light:text-slate-900 tracking-tight mt-1">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
               About <span className="text-gradient">Srinivasan Ravikumar</span>
             </h2>
           </div>
@@ -83,7 +83,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
               download="Srinivasan-Ravikumar-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-xl dark:bg-slate-900 light:bg-slate-900 border border-cyan-500/40 text-cyan-400 light:text-cyan-300 hover:border-cyan-400 text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+              className="px-4 py-2 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-300 hover:border-cyan-400 text-xs font-bold flex items-center gap-2 transition-all shadow-md"
             >
               <Download className="w-4 h-4" /> Download Resume
             </a>
@@ -92,7 +92,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
 
         {/* Tabbed Navigation Bar */}
         <div className="mt-6 flex justify-center sm:justify-start">
-          <div className="p-1 rounded-2xl dark:bg-slate-900/80 light:bg-slate-200/80 border border-white/10 dark:border-white/10 light:border-slate-300 flex items-center gap-2">
+          <div className="p-1 rounded-2xl bg-slate-200/80 dark:bg-slate-900/80 border border-slate-300 dark:border-white/10 flex items-center gap-2">
             {[
               { id: 'about', label: 'About Me', icon: User },
               { id: 'skills', label: 'Skills & Stack', icon: Code2 },
@@ -107,7 +107,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
                   className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-300 ${
                     isActive
                       ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]'
-                      : 'dark:text-slate-400 light:text-slate-600 hover:text-white'
+                      : 'text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -128,35 +128,35 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
           >
             <GlassCard glowColor="cyan" className="p-6 md:p-8 border-cyan-500/30">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                {/* Profile Photo Section — Restored exact styling & object-position from commit 3ff7ae7 */}
+                {/* Profile Photo Section */}
                 <div className="lg:col-span-4 text-center space-y-4">
-                  <div className="relative w-48 h-48 mx-auto rounded-3xl overflow-hidden border-2 border-cyan-400/40 p-1 shadow-[0_0_25px_rgba(6,182,212,0.3)]">
+                  <div className="relative w-48 h-48 mx-auto rounded-3xl overflow-hidden border-2 border-cyan-400/40 p-1 shadow-[0_0_25px_rgba(6,182,212,0.3)] bg-slate-900">
                     <img
                       src={photoMode === 'profile' ? PERSONAL_INFO.profilePhoto : PERSONAL_INFO.animePhoto}
                       alt={PERSONAL_INFO.name}
-                      className="w-full h-full object-cover object-[50%_25%] rounded-2xl transition-transform duration-500 hover:scale-105"
+                      className={`w-full h-full object-cover ${photoMode === 'profile' ? 'object-[50%_25%]' : 'object-center'} rounded-2xl transition-transform duration-500 hover:scale-105`}
                     />
                   </div>
 
                   <button
                     onClick={() => setPhotoMode((prev) => (prev === 'profile' ? 'groot' : 'profile'))}
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl dark:bg-slate-900 light:bg-slate-900 border border-cyan-500/40 text-cyan-400 light:text-cyan-300 hover:border-cyan-400 text-xs font-bold transition-all shadow-md"
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-300 hover:border-cyan-400 text-xs font-bold transition-all shadow-md"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
                     Switch to {photoMode === 'profile' ? 'IamGroot Avatar' : 'Profile Photo'}
                   </button>
 
                   <div>
-                    <h3 className="text-xl font-extrabold dark:text-white light:text-slate-900">{PERSONAL_INFO.name}</h3>
-                    <p className="text-xs font-mono text-cyan-500 dark:text-cyan-400 mt-0.5">{PERSONAL_INFO.title}</p>
-                    <p className="text-xs text-slate-400 mt-1">{PERSONAL_INFO.location}</p>
+                    <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">{PERSONAL_INFO.name}</h3>
+                    <p className="text-xs font-mono text-cyan-600 dark:text-cyan-400 mt-0.5">{PERSONAL_INFO.title}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{PERSONAL_INFO.location}</p>
                   </div>
                 </div>
 
                 {/* Narrative Text ONLY */}
-                <div className="lg:col-span-8 space-y-4 text-sm sm:text-base dark:text-slate-300 light:text-slate-700 leading-relaxed">
+                <div className="lg:col-span-8 space-y-4 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                   <p>
-                    Hello! I'm <strong className="dark:text-white light:text-slate-900 font-bold">{PERSONAL_INFO.name}</strong>, a Full-Stack Developer based in <span className="text-cyan-500 font-semibold">{PERSONAL_INFO.location}</span> with hands-on experience building responsive web applications using <strong className="text-cyan-500 font-bold">Java, Spring Boot, React, and Node.js</strong>.
+                    Hello! I'm <strong className="text-slate-900 dark:text-white font-bold">{PERSONAL_INFO.name}</strong>, a Full-Stack Developer based in <span className="text-cyan-600 dark:text-cyan-400 font-semibold">{PERSONAL_INFO.location}</span> with hands-on experience building responsive web applications using <strong className="text-cyan-600 dark:text-cyan-400 font-bold">Java, Spring Boot, React, and Node.js</strong>.
                   </p>
                   <p>
                     Skilled in developing RESTful APIs (CRUD) and integrating PostgreSQL, MySQL, and MongoDB databases. Proficient in version control and deployment using Git, GitHub, Netlify, and Render. Eager to contribute technical skills to a dynamic engineering team.
@@ -177,7 +177,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
           >
             {EXACT_SKILLS.map((group, gIdx) => (
               <div key={gIdx} className="space-y-3">
-                <h3 className="text-sm font-bold dark:text-white light:text-slate-900 flex items-center gap-2 border-l-4 border-cyan-400 pl-3 uppercase tracking-wider font-mono">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 border-l-4 border-cyan-400 pl-3 uppercase tracking-wider font-mono">
                   {group.category}
                 </h3>
 
@@ -193,7 +193,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
                         <div className={`p-2 rounded-xl ${skill.bg} ${skill.color} group-hover:scale-110 transition-transform duration-300 shadow-sm`}>
                           <Icon className="w-5 h-5" />
                         </div>
-                        <span className="text-xs font-bold dark:text-slate-100 light:text-slate-800 tracking-wide">
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-100 tracking-wide">
                           {skill.name}
                         </span>
                       </GlassCard>
@@ -220,15 +220,15 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
                   <GlassCard glowColor="blue" className="p-5">
                     <div className="flex flex-wrap justify-between items-start gap-2">
                       <div>
-                        <h4 className="text-base font-bold dark:text-white light:text-slate-900">{edu.degree}</h4>
-                        <p className="text-xs text-cyan-500 dark:text-cyan-400 font-medium mt-0.5">{edu.institution} — {edu.location}</p>
+                        <h4 className="text-base font-bold text-slate-900 dark:text-white">{edu.degree}</h4>
+                        <p className="text-xs text-cyan-600 dark:text-cyan-400 font-medium mt-0.5">{edu.institution} — {edu.location}</p>
                       </div>
-                      <span className="px-3 py-1 rounded-full text-xs font-mono bg-blue-500/20 text-cyan-500 dark:text-cyan-300 border border-blue-500/30">
+                      <span className="px-3 py-1 rounded-full text-xs font-mono bg-blue-500/20 text-cyan-600 dark:text-cyan-300 border border-blue-500/30">
                         {edu.period}
                       </span>
                     </div>
                     {edu.details && (
-                      <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
                         {edu.details}
                       </p>
                     )}

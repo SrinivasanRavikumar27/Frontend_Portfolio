@@ -44,11 +44,25 @@
   }
 }
 
-/* Light mode autofill and input contrast override */
+/* Light mode form input & textarea high contrast overrides */
 .light input,
 .light textarea {
+  background-color: #ffffff !important;
   color: #0f172a !important;
+  border-color: #cbd5e1 !important;
   caret-color: #0f172a !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #64748b !important;
+}
+
+.light input:focus,
+.light textarea:focus {
+  background-color: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
 }
 
 .light input:-webkit-autofill,
