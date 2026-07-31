@@ -23,7 +23,7 @@ export interface PersonalInfo {
 export const PERSONAL_CONFIG: PersonalInfo = {
   name: "Srinivasan Ravikumar",
   title: "Full Stack Software Developer | MERN & Java Spring Boot",
-  email: "codebooze027@gmail.com",
+  email: "tosrinivasanravi@gmail.com",
   phone: "+91 9003293105",
   phoneRaw: "+919003293105",
   location: "Chennai, Tamil Nadu, India",

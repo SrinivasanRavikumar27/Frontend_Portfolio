@@ -56,7 +56,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
       addToast({
         type: 'success',
         title: 'Message Sent Successfully!',
-        message: `Thank you ${data.name}! Your message has been sent directly to ${targetEmail}.`,
+        message: `Thank you, ${data.name}! Your message has been sent successfully. I'll get back to you soon.`,
       });
 
       reset();
@@ -65,7 +65,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
       const errorMsg =
         typeof err === 'object' && err?.text
           ? err.text
-          : 'EmailJS keys invalid or network error. Please verify VITE_EMAILJS_PUBLIC_KEY in .env.';
+          : 'EmailJS service error. Please verify your EmailJS keys or connection.';
 
       addToast({
         type: 'error',
@@ -152,7 +152,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                   </a>
                 </div>
 
-                {/* Right Sub-Column (Email, Phone, Location - Vertical Stack) */}
+                {/* Right Sub-Column (Email: tosrinivasanravi@gmail.com, Phone, Location - Vertical Stack) */}
                 <div className="col-span-9 sm:col-span-10 flex flex-col justify-around gap-4">
                   <a
                     href={`mailto:${PERSONAL_INFO.email}`}
@@ -263,7 +263,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                   )}
                 </div>
 
-                {/* Submit Button (Replaced Sparkles icon ONLY with Lucide Send icon) */}
+                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
