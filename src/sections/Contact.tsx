@@ -149,13 +149,17 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                   </a>
                 </div>
 
-                {/* Right Sub-Column (Email: ONLY tosrinivasanravi@gmail.com, Phone, Location - Vertical Stack) */}
+                {/* Right Sub-Column (Email: ONLY tosrinivasanravi@gmail.com opens in NEW TAB, Phone, Location - Vertical Stack) */}
                 <div className="col-span-9 sm:col-span-10 flex flex-col justify-around gap-4">
                   <a
                     href="mailto:tosrinivasanravi@gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 hover:border-cyan-500/40 transition-all group"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open('mailto:tosrinivasanravi@gmail.com', '_blank', 'noopener,noreferrer');
+                    }}
+                    className="flex items-center gap-4 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/5 hover:border-cyan-500/40 transition-all group cursor-pointer"
                   >
                     <div className="p-3 rounded-xl bg-blue-600/20 text-cyan-500 dark:text-cyan-400 border border-blue-500/30 group-hover:scale-110 transition-transform shrink-0">
                       <Mail className="w-5 h-5" />
