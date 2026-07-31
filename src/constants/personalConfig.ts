@@ -35,7 +35,7 @@ export const PERSONAL_CONFIG: PersonalInfo = {
   animePhoto: "/assets/images/anime.png",
   resumeUrl: "/assets/resume/resume.pdf",
   resumeDownloadUrl: "/assets/resume/resume.pdf",
-  resumeFileName: "resume.pdf",
+  resumeFileName: "Srinivasan-Ravikumar-Resume.pdf",
   heroBullets: [
     "Full-Stack Developer with hands-on experience building responsive web applications using Java, Spring Boot, React, and Node.js.",
     "Skilled in developing RESTful APIs (CRUD) and integrating PostgreSQL and MongoDB databases.",

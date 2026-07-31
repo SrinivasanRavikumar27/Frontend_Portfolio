@@ -11,7 +11,6 @@ interface AboutProps {
   onOpenResumeModal: () => void;
 }
 
-// Neutral clean skills list without Antigravity, Figma, Windows Server, Linux, or TypeScript
 const EXACT_SKILLS = [
   {
     category: "Languages & Frameworks",
@@ -81,7 +80,9 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
             </button>
             <a
               href={PERSONAL_INFO.resumeUrl}
-              download={PERSONAL_INFO.resumeFileName || "Srinivasan-Ravikumar-Resume.pdf"}
+              download="Srinivasan-Ravikumar-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2 rounded-xl dark:bg-slate-900 light:bg-slate-900 border border-cyan-500/40 text-cyan-400 light:text-cyan-300 hover:border-cyan-400 text-xs font-bold flex items-center gap-2 transition-all shadow-md"
             >
               <Download className="w-4 h-4" /> Download Resume
@@ -103,10 +104,11 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-300 ${isActive
-                    ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]'
-                    : 'dark:text-slate-400 light:text-slate-600 hover:text-white'
-                    }`}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all duration-300 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                      : 'dark:text-slate-400 light:text-slate-600 hover:text-white'
+                  }`}
                 >
                   <Icon className="w-4 h-4" />
                   {tab.label}
@@ -132,7 +134,7 @@ export const About: React.FC<AboutProps> = ({ onOpenResumeModal }) => {
                     <img
                       src={photoMode === 'profile' ? PERSONAL_INFO.profilePhoto : PERSONAL_INFO.animePhoto}
                       alt={PERSONAL_INFO.name}
-                      className="w-full h-full object-cover object-[50%_25%] rounded-2xl transition-transform duration-500 hover:scale-105"
+                      className="w-full h-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
                     />
                   </div>
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download, FileText, ExternalLink } from 'lucide-react';
+import { X, Download, FileText } from 'lucide-react';
 import { PERSONAL_INFO } from '../../constants/portfolioData';
 
 interface ResumeModalProps {
@@ -23,7 +23,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   if (!isOpen) return null;
 
-  const pdfPath = PERSONAL_INFO.resumeUrl || '/assets/resume/Srinivasan-Ravikumar-Resume.pdf';
+  const pdfPath = PERSONAL_INFO.resumeUrl || '/assets/resume/resume.pdf';
 
   return (
     <AnimatePresence>
@@ -63,6 +63,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
               <a
                 href={pdfPath}
                 download="Srinivasan-Ravikumar-Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-xs shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all flex items-center gap-2"
               >
                 <Download className="w-4 h-4" /> Download PDF

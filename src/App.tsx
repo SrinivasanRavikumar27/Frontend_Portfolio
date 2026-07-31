@@ -115,9 +115,9 @@ export const App: React.FC = () => {
       {/* Global Toast Container */}
       <ToastContainer toasts={toasts} removeToast={removeToast} />
 
-      {/* Floating Action FAB Buttons — EXPAND ONLY THE HOVERED BUTTON; THE OTHER STAYS COLLAPSED AS ICON */}
+      {/* Floating Action FAB Buttons — EXPAND ONLY THE HOVERED BUTTON */}
       <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3 pointer-events-auto items-start">
-        {/* Button 1: Hire Me (Expands ONLY when hovering over this specific button) */}
+        {/* Button 1: Hire Me */}
         <a
           href="#contact"
           className="group flex items-center p-3.5 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 text-white shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:brightness-110 transition-all duration-300 overflow-hidden cursor-pointer"
@@ -130,10 +130,12 @@ export const App: React.FC = () => {
           </span>
         </a>
 
-        {/* Button 2: Download Resume (High Contrast in Light Mode, Expands ONLY when hovering over this specific button) */}
+        {/* Button 2: Download Resume */}
         <a
           href={PERSONAL_INFO.resumeUrl}
-          download={PERSONAL_INFO.resumeFileName || "Srinivasan-Ravikumar-Resume.pdf"}
+          download="Srinivasan-Ravikumar-Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           className="group flex items-center p-3.5 rounded-full dark:bg-slate-900 light:bg-slate-900 border border-cyan-400 text-cyan-300 light:text-cyan-300 hover:text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 overflow-hidden cursor-pointer"
           title="Download Resume"
           aria-label="Download Resume Link"
