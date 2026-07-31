@@ -6,7 +6,7 @@ export interface SkillCategory {
   description: string;
   skills: {
     name: string;
-    level: number; // percentage
+    level: number;
     icon: string;
     description?: string;
   }[];
@@ -47,8 +47,8 @@ export interface ProjectItem {
 }
 
 export interface ContactFormData {
-  user_name: string;
-  user_email: string;
+  name: string;
+  email: string;
   subject: string;
   message: string;
 }

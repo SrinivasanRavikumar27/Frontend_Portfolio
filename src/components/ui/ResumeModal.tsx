@@ -23,6 +23,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   if (!isOpen) return null;
 
+  const pdfPath = PERSONAL_INFO.resumeUrl || '/assets/resume/resume.pdf';
+
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
@@ -37,9 +39,9 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
         {/* Modal Window Container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
           className="relative w-full max-w-4xl h-[90vh] dark:bg-[#090D16] light:bg-white rounded-3xl border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.3)] flex flex-col z-10 overflow-hidden"
         >
           {/* Header Bar */}
@@ -59,10 +61,8 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             <div className="flex items-center gap-3">
               {/* Direct Download PDF Button */}
               <a
-                href={PERSONAL_INFO.resumeUrl}
-                download={PERSONAL_INFO.resumeFileName || "Srinivasan-Ravikumar-Resume.pdf"}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={pdfPath}
+                download="resume.pdf"
                 className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-xs shadow-[0_0_15px_rgba(37,99,235,0.4)] hover:brightness-110 transition-all flex items-center gap-2"
               >
                 <Download className="w-4 h-4" /> Download PDF
@@ -79,32 +79,17 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             </div>
           </div>
 
-          {/* Isolated PDF Viewer Container */}
+          {/* PDF Viewer Container */}
           <div
             className="flex-1 w-full bg-slate-950 p-2 sm:p-4 overflow-y-auto"
             style={{ overscrollBehavior: 'contain' }}
             onWheel={(e) => e.stopPropagation()}
           >
-            <object
-              data={PERSONAL_INFO.resumeUrl}
-              type="application/pdf"
+            <iframe
+              src={pdfPath}
+              title={`${PERSONAL_INFO.name} Resume`}
               className="w-full h-full min-h-[600px] rounded-xl border border-white/10"
-            >
-              <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4">
-                <FileText className="w-12 h-12 text-cyan-400 animate-pulse" />
-                <p className="text-sm text-slate-300">
-                  Click below to view or download the resume PDF.
-                </p>
-                <a
-                  href={PERSONAL_INFO.resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 font-bold text-sm flex items-center gap-2 hover:bg-cyan-400 transition-all"
-                >
-                  <ExternalLink className="w-4 h-4" /> Open Resume PDF
-                </a>
-              </div>
-            </object>
+            />
           </div>
         </motion.div>
       </div>

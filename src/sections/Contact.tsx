@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import emailjs from '@emailjs/browser';
 import confetti from 'canvas-confetti';
-import { Send, Mail, Phone, MapPin, Linkedin, Github, MessageSquare, Instagram, Sparkles } from 'lucide-react';
+import { Send, Mail, Phone, MapPin, Linkedin, Github, MessageSquare, Instagram } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { PERSONAL_INFO } from '../constants/portfolioData';
 import { GlassCard } from '../components/ui/GlassCard';
@@ -23,79 +23,58 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
   } = useForm<ContactFormData>();
 
   const onSubmit = async (data: ContactFormData) => {
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_portfolio';
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_portfolio';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'public_key_portfolio';
 
-    const hasValidEmailJS =
-      serviceId &&
-      templateId &&
-      publicKey &&
-      serviceId !== 'service_portfolio' &&
-      publicKey !== 'public_key_portfolio';
+    const targetEmail = 'codebooze027@gmail.com';
 
-    if (hasValidEmailJS) {
-      try {
-        await emailjs.send(
-          serviceId,
-          templateId,
-          {
-            from_name: data.user_name,
-            from_email: data.user_email,
-            subject: data.subject || 'Portfolio Inquiry',
-            message: data.message,
-            to_email: PERSONAL_INFO.email,
-          },
-          publicKey
-        );
+    const templateParams = {
+      name: data.name,
+      user_name: data.name,
+      email: data.email,
+      user_email: data.email,
+      reply_to: data.email,
+      subject: data.subject,
+      message: data.message,
+      to_email: targetEmail,
+    };
 
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#2563EB', '#06B6D4', '#7C3AED'],
-        });
+    try {
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
-        addToast({
-          type: 'success',
-          title: 'Message Sent Successfully!',
-          message: `Thank you ${data.user_name}! Your message has been sent to ${PERSONAL_INFO.email}.`,
-        });
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#2563EB', '#06B6D4', '#7C3AED'],
+      });
 
-        reset();
-        setIsSubmitting(false);
-        return;
-      } catch (err) {
-        console.warn('EmailJS delivery failed, using direct email client fallback:', err);
-      }
+      addToast({
+        type: 'success',
+        title: 'Message Sent Successfully!',
+        message: `Thank you ${data.name}! Your message has been sent directly to ${targetEmail}.`,
+      });
+
+      reset();
+    } catch (err: any) {
+      console.error('EmailJS direct delivery error:', err);
+      const errorMsg =
+        typeof err === 'object' && err?.text
+          ? err.text
+          : 'EmailJS keys invalid or network error. Please verify VITE_EMAILJS_PUBLIC_KEY in .env.';
+
+      addToast({
+        type: 'error',
+        title: 'Failed to Send Message',
+        message: errorMsg,
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // Direct mailto fallback if EmailJS is not configured or fails
-    const subjectStr = encodeURIComponent(data.subject || `Portfolio Inquiry from ${data.user_name}`);
-    const bodyStr = encodeURIComponent(
-      `Name: ${data.user_name}\nEmail: ${data.user_email}\n\nMessage:\n${data.message}`
-    );
-    const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${subjectStr}&body=${bodyStr}`;
-
-    window.open(mailtoUrl, '_blank');
-
-    confetti({
-      particleCount: 60,
-      spread: 60,
-      origin: { y: 0.6 },
-      colors: ['#2563EB', '#06B6D4', '#7C3AED'],
-    });
-
-    addToast({
-      type: 'info',
-      title: 'Opening Email Client',
-      message: `Opening your email app to send your message directly to ${PERSONAL_INFO.email}.`,
-    });
-
-    reset();
-    setIsSubmitting(false);
   };
 
   return (
@@ -115,7 +94,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
           </h2>
         </div>
 
-        {/* Swapped 50/50 Layout: Left = Direct Contact, Right = Contact Form */}
+        {/* 50/50 Layout: Left = Direct Contact Details, Right = Contact Form */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Panel (50%): Direct Contact ONLY */}
           <div className="lg:col-span-6">
@@ -219,57 +198,64 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
             </GlassCard>
           </div>
 
-          {/* Right Panel (50%): Contact Form ONLY (Matching Left Panel Height) */}
+          {/* Right Panel (50%): Contact Form ONLY */}
           <div className="lg:col-span-6">
             <GlassCard glowColor="purple" className="p-6 md:p-8 h-full border-purple-500/30 flex flex-col justify-between">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 my-auto">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 my-auto" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Name Input */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-mono dark:text-slate-300 light:text-slate-700 block">Your Name *</label>
                     <input
                       type="text"
                       placeholder="John Doe"
-                      {...register('user_name', { required: 'Name is required' })}
+                      {...register('name', { required: 'Name is required' })}
                       className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-xs"
                     />
-                    {errors.user_name && (
-                      <p className="text-[10px] text-rose-400">{errors.user_name.message}</p>
+                    {errors.name && (
+                      <p className="text-[10px] text-rose-400">{errors.name.message}</p>
                     )}
                   </div>
 
+                  {/* Email Input */}
                   <div className="space-y-1.5">
                     <label className="text-xs font-mono dark:text-slate-300 light:text-slate-700 block">Your Email *</label>
                     <input
                       type="email"
                       placeholder="johndoe@example.com"
-                      {...register('user_email', {
+                      {...register('email', {
                         required: 'Email is required',
-                        pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' },
+                        pattern: { value: /^\S+@\S+$/i, message: 'Please enter a valid email address' },
                       })}
                       className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-xs"
                     />
-                    {errors.user_email && (
-                      <p className="text-[10px] text-rose-400">{errors.user_email.message}</p>
+                    {errors.email && (
+                      <p className="text-[10px] text-rose-400">{errors.email.message}</p>
                     )}
                   </div>
                 </div>
 
+                {/* Subject Input */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono dark:text-slate-300 light:text-slate-700 block">Subject</label>
+                  <label className="text-xs font-mono dark:text-slate-300 light:text-slate-700 block">Subject *</label>
                   <input
                     type="text"
                     placeholder="Software Developer Opportunity"
-                    {...register('subject')}
+                    {...register('subject', { required: 'Subject is required' })}
                     className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-xs"
                   />
+                  {errors.subject && (
+                    <p className="text-[10px] text-rose-400">{errors.subject.message}</p>
+                  )}
                 </div>
 
+                {/* Message Input */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-mono dark:text-slate-300 light:text-slate-700 block">Message *</label>
                   <textarea
                     rows={4}
                     placeholder="Hi Srinivasan, I'd like to discuss a role..."
-                    {...register('message', { required: 'Message cannot be empty' })}
+                    {...register('message', { required: 'Message is required' })}
                     className="w-full px-3.5 py-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-100 light:text-slate-900 placeholder-slate-500 focus:outline-none focus:border-cyan-400 text-xs resize-none"
                   />
                   {errors.message && (
@@ -277,6 +263,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                   )}
                 </div>
 
+                {/* Submit Button (Replaced Sparkles icon ONLY with Lucide Send icon) */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -284,7 +271,7 @@ export const Contact: React.FC<ContactProps> = ({ addToast }) => {
                 >
                   {isSubmitting ? (
                     <>
-                      <Sparkles className="w-4 h-4 animate-spin" /> Sending...
+                      <Send className="w-4 h-4 animate-spin" /> Sending...
                     </>
                   ) : (
                     <>

@@ -23,7 +23,7 @@ export interface PersonalInfo {
 export const PERSONAL_CONFIG: PersonalInfo = {
   name: "Srinivasan Ravikumar",
   title: "Full Stack Software Developer | MERN & Java Spring Boot",
-  email: "tosrinivasanravi@gmail.com",
+  email: "codebooze027@gmail.com",
   phone: "+91 9003293105",
   phoneRaw: "+919003293105",
   location: "Chennai, Tamil Nadu, India",
@@ -33,9 +33,9 @@ export const PERSONAL_CONFIG: PersonalInfo = {
   instagram: "https://instagram.com/srinivasan_ravikumar",
   profilePhoto: "/assets/images/profile.png",
   animePhoto: "/assets/images/anime.png",
-  resumeUrl: "/assets/resume/Srinivasan-Ravikumar-Resume.pdf",
-  resumeDownloadUrl: "/assets/resume/Srinivasan-Ravikumar-Resume.pdf",
-  resumeFileName: "Srinivasan-Ravikumar-Resume.pdf",
+  resumeUrl: "/assets/resume/resume.pdf",
+  resumeDownloadUrl: "/assets/resume/resume.pdf",
+  resumeFileName: "resume.pdf",
   heroBullets: [
     "Full-Stack Developer with hands-on experience building responsive web applications using Java, Spring Boot, React, and Node.js.",
     "Skilled in developing RESTful APIs (CRUD) and integrating PostgreSQL and MongoDB databases.",
