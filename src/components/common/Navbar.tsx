@@ -51,8 +51,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? 'glass-nav py-3 shadow-2xl' : 'bg-transparent py-5'
-        }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled ? 'glass-nav py-3 shadow-2xl' : 'bg-transparent py-5'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo: Srinivasan.R */}
@@ -70,17 +71,18 @@ export const Navbar: React.FC<NavbarProps> = ({
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-slate-900/60 dark:bg-slate-900/60 light:bg-slate-200/70 p-1.5 rounded-full border border-white/10 dark:border-white/10 light:border-slate-300 backdrop-blur-md">
+        <nav className="hidden md:flex items-center gap-1 bg-slate-900/60 dark:bg-slate-900/60 light:bg-white/80 p-1.5 rounded-full border border-white/10 dark:border-white/10 light:border-slate-300 light:shadow-md backdrop-blur-md">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
               <a
                 key={link.id}
                 href={link.href}
-                className={`relative px-4 py-2 text-xs font-semibold rounded-full transition-colors duration-200 ${isActive
+                className={`relative px-4 py-2 text-xs font-semibold rounded-full transition-colors duration-200 ${
+                  isActive
                     ? 'text-white'
-                    : 'dark:text-slate-400 light:text-slate-600 dark:hover:text-slate-200 light:hover:text-slate-900'
-                  }`}
+                    : 'dark:text-slate-400 light:text-slate-700 dark:hover:text-slate-200 light:hover:text-slate-900'
+                }`}
               >
                 {isActive && (
                   <motion.div
@@ -105,15 +107,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={toggleCodeRain}
             title="Toggle Matrix Code Rain Effect"
             aria-label="Toggle Code Rain"
-            className={`p-2.5 rounded-xl border transition-all ${isCodeRainActive
-                ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
-                : 'dark:bg-slate-900/60 light:bg-white border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-400 light:text-slate-600 dark:hover:text-white light:hover:text-slate-900'
-              }`}
+            className={`p-2 rounded-xl border transition-all ${
+              isCodeRainActive
+                ? 'bg-cyan-500/20 border-cyan-400 text-cyan-500 dark:text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                : 'dark:bg-slate-900/60 light:bg-white border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-400 light:text-slate-800 light:shadow-md hover:light:bg-slate-100 dark:hover:text-white'
+            }`}
           >
             <Zap className="w-4 h-4" />
           </button>
 
-          {/* Resume Modal Trigger (Strong Contrast in Light Mode) */}
+          {/* Resume Modal Trigger */}
           {onOpenResumeModal && (
             <button
               onClick={onOpenResumeModal}
@@ -139,7 +142,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Mobile Menu"
-            className="p-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-200 light:text-slate-800 hover:text-cyan-400 transition-colors"
+            className="p-2.5 rounded-xl dark:bg-slate-900/80 light:bg-white border border-white/10 dark:border-white/10 light:border-slate-300 dark:text-slate-200 light:text-slate-800 hover:text-cyan-400 transition-colors shadow-sm"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -161,10 +164,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.id}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${activeSection === link.id
+                  className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                    activeSection === link.id
                       ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white'
                       : 'dark:text-slate-300 light:text-slate-700 dark:hover:bg-slate-800 light:hover:bg-slate-200'
-                    }`}
+                  }`}
                 >
                   {link.name}
                 </a>

@@ -44,7 +44,36 @@
   }
 }
 
-/* Light Theme Ambient Decorative Circles (Inspired by reference UI) */
+/* Light mode autofill and input contrast override */
+.light input,
+.light textarea {
+  color: #0f172a !important;
+  caret-color: #0f172a !important;
+}
+
+.light input:-webkit-autofill,
+.light input:-webkit-autofill:hover,
+.light input:-webkit-autofill:focus,
+.light textarea:-webkit-autofill,
+.light textarea:-webkit-autofill:hover,
+.light textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0f172a !important;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill,
+.dark textarea:-webkit-autofill:hover,
+.dark textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f8fafc !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0f172a inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Light Theme Ambient Decorative Circles */
 .light-ambient-bubbles {
   position: absolute;
   inset: 0;
@@ -88,7 +117,7 @@
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* Glassmorphism Light Mode Styles (Reference Inspired) */
+/* Glassmorphism Light Mode Styles */
 .light .glass-card {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
